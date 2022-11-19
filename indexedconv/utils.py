@@ -228,7 +228,7 @@ def neighbours_extraction(index_matrix, kernel_type='Hex', radius=1, stride=1, d
         radius (int): The radius of the kernel.
         stride (int): The stride.
         dilation (int): The dilation. A dilation of 1 means no dilation.
-        retina (bool): Whether to build a retina like kernel. If True, dilation must be 1.
+        retina (bool): Whether to build a retina like kernel. If True, dilation must be 1. 控制是否创建六边形
 
     Returns:
         A torch.Tensor - the matrix of the neighbours.
@@ -300,7 +300,7 @@ def neighbours_extraction(index_matrix, kernel_type='Hex', radius=1, stride=1, d
 
 def prepare_mask(indices):
     """Prepares the indices and the mask for the GEMM im2col operation.
-
+    如果索引中有-1 mask就赋值为0 indice 也转为0 因为-1不是一个好的索引 其实这个indice 不转是不是也可以
     Args:
         indices (torch.Tensor): The matrix of indices containing the neighbours of each pixel of interest.
 
