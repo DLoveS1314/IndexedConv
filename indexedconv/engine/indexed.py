@@ -93,7 +93,7 @@ class IndexedConv(nn.Module):
         \end{array}
 
     where
-
+    | 注释出错 很奇怪为什么没有开源贡献者支出这个错误 应该是 K x L 维度 他的test测试里正好时9 *9 K=l 所以看不出这个问题
     | `indices` is a L x K tensor, where `K` is the size of the convolution kernel,
     | providing the indices of the `K` neighbors of input element `i`.
     | A -1 entry means zero-padding.
@@ -133,12 +133,13 @@ class IndexedConv(nn.Module):
 
         groups = 1
 
-        kernel_size = indices.shape[0]
-
         self.in_channels = in_channels
         self.out_channels = out_channels
-        self.kernel_size = kernel_size
+        #这个操作不改变indices的shape
         self.indices, self.mask = utils.prepare_mask(indices)
+        kernel_size = self.indices.shape[0]
+        self.kernel_size = kernel_size
+        
         self.output_width = self.indices.shape[1]
 
         self.register_buffer('indices_', self.indices)

@@ -219,7 +219,7 @@ def build_kernel(kernel_type, radius=1, dilation=1):
 
 def neighbours_extraction(index_matrix, kernel_type='Hex', radius=1, stride=1, dilation=1, retina=False):
     """Builds the matrix of indices from an index matrix based on a kernel.
-
+    根据图片每个像素索引的位置 确定每个像素对应的邻居 这个时基于平面的 基于球面的无法使用 直接使用DGGRID就生成邻居矩阵就行了 输出结果时 L *K
     The matrix of indices contains for each pixel of interest its neighbours, including itself.
 
     Args:
@@ -300,7 +300,7 @@ def neighbours_extraction(index_matrix, kernel_type='Hex', radius=1, stride=1, d
 
 def prepare_mask(indices):
     """Prepares the indices and the mask for the GEMM im2col operation.
-    如果索引中有-1 mask就赋值为0 indice 也转为0 因为-1不是一个好的索引 其实这个indice 不转是不是也可以
+    如果索引中有-1 mask就赋值为0 indice 也转为0 因为-1不是一个好的索引 其实这个indice 不转是不是也可以 因为 mask 已经 为0了 
     Args:
         indices (torch.Tensor): The matrix of indices containing the neighbours of each pixel of interest.
 
